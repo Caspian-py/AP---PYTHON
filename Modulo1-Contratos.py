@@ -6,6 +6,7 @@ centro = os.get_terminal_size().columns
 titulo = Fore.YELLOW + Style.BRIGHT
 texto = Fore.CYAN + Style.BRIGHT
 error = Fore.RED + Style.BRIGHT
+exito = Fore.GREEN + Style.BRIGHT
 
 datos = []
 
@@ -14,62 +15,79 @@ def clear():
 
 
 def validacion_nombre():
-    try:
-        print(f"{titulo}NOMBRE Y APELIIDO:")
-        nombres = input(f"{texto}>>> ").strip()
-        if len(nombres.split()) in (3, 4, 5) and all(palabra.isalpha() for palabra in nombres.split()):
-            return nombres, True
-        else:
-            raise ValueError
-        
-    except ValueError:
-        return None, False
+    while True:
+        clear()
+        print(f"{titulo}PARA SALIR INGRESE (cancelar)")
+        print()
+        try:
+            print(f"{titulo}NOMBRE Y APELIIDO:")
+            nombres = input(f"{texto}>>> ").strip()
+            if nombres.lower() in ("cancelar", ""):
+                return None, False
+            else:
+                if len(nombres.split()) in (3, 4, 5) and all(palabra.isalpha() for palabra in nombres.split()):
+                    return nombres, True
+                else:
+                    raise ValueError
+        except ValueError:
+            input(F"{error}NOMBRE NO VALIDO ")
 
 def validacion_dni():
-    try:
-        print(f"{titulo}DNI:")
-        dni = input(f"{texto}>>> ").strip()
-        if dni.isdigit() and len(str(dni)) == 8:
-            return int(dni), True
-        else:
-            raise ValueError
-    except ValueError:
-        return None, False
+    while True:
+        clear()
+        print(f"{titulo}PARA SALIR INGRESE (cancelar)")
+        print()
+        try:
+            print(f"{titulo}DNI:")
+            dni = input(f"{texto}>>> ").strip()
+            if dni in ("cancelar", ""):
+                return None, False
+            else:
+                if dni.isdigit() and len(str(dni)) == 8:
+                    return int(dni), True
+                else:
+                    raise ValueError
+        except ValueError:
+            input(f"{error}DNI NO VALIDO")
 
 def validacion_cargo():
-    try:
-        print(f"{titulo}CARGO O PUESTO:")
-        cargo = input(f"{texto}>>> ").strip()
-        if len(cargo.split()) in (1, 2, 3, 4) and all(palabra.isalpha() for palabra in cargo.split()):
-            return cargo, True
-        else:
-            raise ValueError
-    except ValueError:
-        return None, False
+    while True:
+        clear()
+        print(f"{titulo}PARA SALIR INGRESE (cancelar)")
+        print()
+        try:
+            print(f"{titulo}CARGO O PUESTO:")
+            cargo = input(f"{texto}>>> ").strip()
+            if cargo in ("cancelar", ""):
+                return None, False
+            else:
+                if len(cargo.split()) in (2, 3, 4) and all(palabra.isalpha() for palabra in cargo.split()):
+                    return cargo, True
+                else:
+                    raise ValueError
+        except ValueError:
+            input(f"{error}CARGO NO VALIDO")
     
 
 def Datos():
     while True:
         clear()
         nombres, estado_nombre = validacion_nombre()
-        if estado_nombre == False:
-            input(F"{error}NOMBRE NO VALIDO")
-            continue
-        print(nombres)
+        if not estado_nombre:
+            input(f"{error}CANCELADO")
+            return False
 
         dni, estado_dni = validacion_dni()
-        if estado_dni == False:
-            input(f"{error}DNI NO VALIDO ")
-            continue
-        print(dni)
+        if not estado_dni:
+            input(f"{error}CANCELADO")
+            return False
 
         cargo, estado_cargo = validacion_cargo()
-        if estado_cargo == False:
-            input(f"{error}CARGO NO VALIDO")
-            continue
-
+        if not estado_cargo:
+            input(f"{error}CANCELADO")
+            return False
         
-        return
+        return True
         
 
 def main():
@@ -77,9 +95,13 @@ def main():
         clear()
         print(f"{titulo}BIENVENIDO AL SISTEMA DE CONTRATOS".center(centro))
         print()
-        input(f"{texto}VAMOS A PEDIRTE QUE LLENES TUS DATOS POR FAVOR (enter para continuar) ")
-        Datos()
+        print(f"{texto}VAMOS A PEDIRTE QUE LLENES TUS DATOS POR FAVOR (enter para continuar) ")
         input()
+        if Datos():
+            input(f"{exito}DATOS VALIDOS")
+        else:
+            print(f"{error}CANCELADO")
+            if input("")
         
 
                 
