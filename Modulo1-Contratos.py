@@ -87,6 +87,13 @@ def Datos():
             input(f"{error}CANCELADO")
             return False
         
+        datos.append(
+            {
+                "nombres": nombres.upper(),
+                "dni": dni,
+                "cargo": cargo.lower()
+            }
+        )
         return True
         
 
@@ -98,11 +105,13 @@ def main():
         print(f"{texto}VAMOS A PEDIRTE QUE LLENES TUS DATOS POR FAVOR (enter para continuar) ")
         input()
         if Datos():
+            clear()
             input(f"{exito}DATOS VALIDOS")
         else:
-            print(f"{error}CANCELADO")
-            if input("")
-        
+            clear()
+            input(f"{error}PRESIONE (enter) PARA SALIR")
+            return
+        input(datos)
 
                 
 main()
