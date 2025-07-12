@@ -13,7 +13,6 @@ datos = []
 def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
-
 def validacion_nombre():
     while True:
         clear()
@@ -67,7 +66,6 @@ def validacion_cargo():
                     raise ValueError
         except ValueError:
             input(f"{error}CARGO NO VALIDO")
-    
 
 def Datos():
     while True:
@@ -95,23 +93,43 @@ def Datos():
             }
         )
         return True
-        
+
+def Contratos():
+    while True:
+        clear()
+        print(f"{titulo}SELECCIONA EL TIPO DE CONTRATO LABORAL:")
+        print()
+        input()
+        return
 
 def main():
     while True:
         clear()
         print(f"{titulo}BIENVENIDO AL SISTEMA DE CONTRATOS".center(centro))
         print()
-        print(f"{texto}VAMOS A PEDIRTE QUE LLENES TUS DATOS POR FAVOR (enter para continuar) ")
-        input()
+        
+        print(f"{texto}DATOS DEL TRABAJADOR")
+        input("(enter para continuar) ")
+
         if Datos():
             clear()
-            input(f"{exito}DATOS VALIDOS")
+            print(f"{exito}DATOS VALIDOS")
         else:
             clear()
             input(f"{error}PRESIONE (enter) PARA SALIR")
             return
-        input(datos)
+        
+        print(f"{texto}LISTA DE CONTRATOS DISPONIBLES")
+        input("(enter para continuar) ")
+
+        if Contratos():
+            clear()
+            input(f"{exito} CONTRATO SELECCIONADO")
+        else:
+            clear()
+            input(f"{error} PRESIONE (enter) PARA SALIR")
+            return
+        
 
                 
 main()
