@@ -33,6 +33,14 @@ contratos = {
 def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
+def mostrar_contratos():
+    print(f"{titulo}TIPOS DE CONTRATOS".center(centro))
+    print()
+    print(f"{titulo} {list(contratos.keys())[0]}: {texto}{contratos['Indeterminado']}")
+    
+    print(f"{titulo} {list(contratos.keys())[1]}: {texto}{contratos['Temporal']['Inicio o incremeto de actividades']}")
+    input()
+
 def validacion_nombre():
     while True:
         clear()
@@ -125,6 +133,7 @@ def Contratos():
 def main():
     while True:
         clear()
+        mostrar_contratos()
         print(f"{titulo}BIENVENIDO AL SISTEMA DE CONTRATOS".center(centro))
         print()
         
