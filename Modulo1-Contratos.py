@@ -10,6 +10,26 @@ exito = Fore.GREEN + Style.BRIGHT
 
 datos = []
 
+contratos = {
+    "Indeterminado": "No tiene fecha de termino. Se asume cuando hay continuidad, subordinacion y pago.",
+    "Temporal": {
+        "Inicio o incremento de actividades": "Para empresas nuevas o que abren nueva sede o linea de negocio. Max 3 años",
+        "Necesidades del mercado": "Por aumento temporal de la demanda. Renovable hasta 5 años.",
+        "Reconversion empresarial": "Cambios en procesos, tecnologia o maquinaria . Max. 2 años."
+    },
+    "Accidental": {
+        "Ocasional": "Actividades no habituales, por un tiempo corto, Max. 6 meses al año.",
+        "Suplencia": "Para reemplazar a un trabajador con vinculo suspendido (por licencia, etc..).",
+        "Emergencia": "Por eventos inesperados: sismos, inundaciones, etc. Dure lo que dure la emergencia."
+    },
+    "Obra o servicio": {
+        "Especifico": "Para una tarea concreta con fecha fin (ej. Campaña publicitaria puntual).",
+        "Intermitente": "Actividades que ocurren varias veces al año, pero no de forma continua.",
+        "Temporada": "Actividades que se repiten cada año en la misma epoca (ej. cosecha, navidad)."
+    }
+
+}
+
 def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
