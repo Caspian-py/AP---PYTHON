@@ -7,8 +7,9 @@ titulo = Fore.YELLOW + Style.BRIGHT
 texto = Fore.CYAN + Style.BRIGHT
 error = Fore.RED + Style.BRIGHT
 exito = Fore.GREEN + Style.BRIGHT
+blanco = Fore.WHITE + Style.BRIGHT
 
-datos = []
+datos = {}
 
 contratos = {
     "Indeterminado": "No tiene fecha de termino. Se asume cuando hay continuidad, subordinacion y pago.",
@@ -33,7 +34,16 @@ contratos = {
 def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
+def datos_trabajador():
+    print(f"{blanco}=" * 30)
+    print(f"{titulo}DATOS DEL TRABAJADOR".center(40))
+    print(f"{titulo}DNI: {datos['dni']}")
+    print(f"{titulo}NOMBRE: {datos['nombres']}")
+    print(f"{titulo}CARGO: {datos['cargo']}")
+    print()
+    print(f"{blanco}=" * 30)
 def mostrar_contratos():
+    datos_trabajador()
     print(f"{titulo}TIPOS DE CONTRATOS".center(centro))
     for tipo, contenido in contratos.items():
         print(f"{titulo}{tipo}: ")
@@ -116,14 +126,12 @@ def Datos():
         if not estado_cargo:
             input(f"{error}CANCELADO")
             return False
-        
-        datos.append(
-            {
+        global datos
+        datos = {
                 "nombres": nombres.upper(),
                 "dni": dni,
-                "cargo": cargo.lower()
+                "cargo": cargo.upper()
             }
-        )
         return True
 
 def Contratos():
@@ -133,7 +141,6 @@ def Contratos():
         print()
         print(f"{titulo}SELECCIONA EL TIPO DE CONTRATO LABORAL:")
         input()
-        
         return
 
 def main():
@@ -164,7 +171,5 @@ def main():
             input(f"{error} PRESIONE (enter) PARA SALIR")
             return
         
-
-                
 main()
 
