@@ -13,17 +13,17 @@ datos = {}
 
 contratos = {
     "Indeterminado": "No tiene fecha de termino. Se asume cuando hay continuidad, subordinacion y pago.",
-    "Naturaleza Temporal": {
+    "Naturaleza emporal": {
         "Inicio o incremento de actividades": "Para empresas nuevas o que abren nueva sede o linea de negocio. Max 3 años",
         "Necesidades del mercado": "Por aumento temporal de la demanda. Renovable hasta 5 años.",
         "Reconversion empresarial": "Cambios en procesos, tecnologia o maquinaria . Max. 2 años."
     },
-    "Naturaleza Accidental": {
+    "Naturaleza ccidental": {
         "Ocasional": "Actividades no habituales, por un tiempo corto, Max. 6 meses al año.",
         "Suplencia": "Para reemplazar a un trabajador con vinculo suspendido (por licencia, etc..).",
         "Emergencia": "Por eventos inesperados: sismos, inundaciones, etc. Dure lo que dure la emergencia."
     },
-    "Naturaleza Obra o servicio": {
+    "Naturaleza bra o servicio": {
         "Especifico": "Para una tarea concreta con fecha fin (ej. Campaña publicitaria puntual).",
         "Intermitente": "Actividades que ocurren varias veces al año, pero no de forma continua.",
         "Temporada": "Actividades que se repiten cada año en la misma epoca (ej. cosecha, navidad)."
@@ -34,14 +34,43 @@ contratos = {
 def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
+def generar_resumen(c):
+    print(f"{blanco}=" * 40)
+    print(f"{titulo}RESUMEN DEL CONTRATO LABORAL".center(40))
+    print(f"{blanco}=" * 40)
+    print()
+    datos_trabajador()
+    print()
+    print(f"{titulo}TIPO DE CONTRATO ASIGNADO:")
+    print(f"{titulo}Modaliad: {texto}{c.upper()}")
+    print(f"{titulo}Descripcion: ", end="")
+
+    if c in contratos:
+        valor = contratos[c]
+        if isinstance(valor, str):
+            print(f"{texto}{valor}")
+        elif isinstance(valor, dict):
+            for con in contratos():
+                if isinstance(con, dict):
+                    for clave, descripcion in con.items():
+                        if clave == c:
+                            print(f"{descripcion}")
+        else:
+            print(f"{error}tipo de contrato no valido")
+    input()
+        
+
+
+
+
 def datos_trabajador():
-    print(f"{blanco}=" * 30)
+    
     print(f"{titulo}DATOS DEL TRABAJADOR".center(40))
     print(f"{titulo}DNI: {datos['dni']}")
     print(f"{titulo}NOMBRE: {datos['nombres']}")
     print(f"{titulo}CARGO: {datos['cargo']}")
-    print()
-    print(f"{blanco}=" * 30)
+    
+
 def mostrar_contratos():
     datos_trabajador()
     print(f"{titulo}TIPOS DE CONTRATOS".center(centro))
@@ -139,8 +168,15 @@ def Contratos():
         clear()
         mostrar_contratos()
         print()
-        print(f"{titulo}SELECCIONA EL TIPO DE CONTRATO LABORAL:")
-        input()
+        print(f"{titulo}ESCRIBE EL TIPO DE CONTRATO LABORAL O (salir) PARA SALIR:")
+        c = input().strip()
+        if c.lower() in ("cancelar", 'salir'):
+            return
+        elif c.lower() in ("indeterminado", "inicio o incremento de actividades", "necesidades del mercado", "reconversion empresarial", "ocasional", "suplencia", "emergencia","especifico" , "intermitente", "temporada"):
+            generar_resumen(c.capitalize())
+        else:
+            input(f"{error}CONTRATO NO VALIDO. ")
+            continue
         return
 
 def main():
