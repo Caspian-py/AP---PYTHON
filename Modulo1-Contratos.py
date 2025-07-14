@@ -12,17 +12,17 @@ datos = []
 
 contratos = {
     "Indeterminado": "No tiene fecha de termino. Se asume cuando hay continuidad, subordinacion y pago.",
-    "Temporal": {
+    "Naturaleza Temporal": {
         "Inicio o incremento de actividades": "Para empresas nuevas o que abren nueva sede o linea de negocio. Max 3 años",
         "Necesidades del mercado": "Por aumento temporal de la demanda. Renovable hasta 5 años.",
         "Reconversion empresarial": "Cambios en procesos, tecnologia o maquinaria . Max. 2 años."
     },
-    "Accidental": {
+    "Naturaleza Accidental": {
         "Ocasional": "Actividades no habituales, por un tiempo corto, Max. 6 meses al año.",
         "Suplencia": "Para reemplazar a un trabajador con vinculo suspendido (por licencia, etc..).",
         "Emergencia": "Por eventos inesperados: sismos, inundaciones, etc. Dure lo que dure la emergencia."
     },
-    "Obra o servicio": {
+    "Naturaleza Obra o servicio": {
         "Especifico": "Para una tarea concreta con fecha fin (ej. Campaña publicitaria puntual).",
         "Intermitente": "Actividades que ocurren varias veces al año, pero no de forma continua.",
         "Temporada": "Actividades que se repiten cada año en la misma epoca (ej. cosecha, navidad)."
@@ -35,11 +35,15 @@ def clear():
 
 def mostrar_contratos():
     print(f"{titulo}TIPOS DE CONTRATOS".center(centro))
-    print()
-    print(f"{titulo} {list(contratos.keys())[0]}: {texto}{contratos['Indeterminado']}")
-    
-    print(f"{titulo} {list(contratos.keys())[1]}: {texto}{contratos['Temporal']['Inicio o incremeto de actividades']}")
-    input()
+    for tipo, contenido in contratos.items():
+        print(f"{titulo}{tipo}: ")
+        if isinstance(contenido, dict):
+            for subtipo, descripcion in contenido.items():
+                print(f"{titulo}{subtipo}: {texto}{descripcion}")
+            print()
+        else:
+            print(f"{texto}{contenido}")
+            print()
 
 def validacion_nombre():
     while True:
@@ -125,15 +129,16 @@ def Datos():
 def Contratos():
     while True:
         clear()
-        print(f"{titulo}SELECCIONA EL TIPO DE CONTRATO LABORAL:")
+        mostrar_contratos()
         print()
+        print(f"{titulo}SELECCIONA EL TIPO DE CONTRATO LABORAL:")
         input()
+        
         return
 
 def main():
     while True:
         clear()
-        mostrar_contratos()
         print(f"{titulo}BIENVENIDO AL SISTEMA DE CONTRATOS".center(centro))
         print()
         
@@ -162,7 +167,4 @@ def main():
 
                 
 main()
-
-
-
 
