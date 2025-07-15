@@ -27,12 +27,34 @@ def validacion_nombre():
         except ValueError:
             input("NOMBRE NO VALIDO")
 
-def datos():
+def validacion_cargo():
+    while True:
+        clear()
+        print("PARA CANCELAR INGRESE 'CANCELAR'. ")
+        try:
+            print("CARGO:")
+            cargo = input(">>> ").lower().strip()
+            if cargo in ("cancelar", "salir"):
+                return None, False
+            else:
+                if len(cargo.split()) in (2, 3, 4, 5) and all(palabra.isalpha() for palabra in cargo.split()):
+                    return cargo, True
+                else:
+                    raise ValueError
+        except ValueError:
+            input("CARGO NO VALIDO")
 
+def datos():
 
     nombre, estado_nombre = validacion_nombre()
     if not estado_nombre:
-        print("CANCELADO")
+        input("CANCELADO")
+        return
+
+    cargo, estado_cargo = validacion_cargo()
+    if not estado_cargo:
+        input("CANCELADO")
+        return
 
         
 
