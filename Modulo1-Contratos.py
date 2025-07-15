@@ -18,12 +18,12 @@ contratos = {
         "Necesidades del mercado": "Por aumento temporal de la demanda. Renovable hasta 5 años.",
         "Reconversion empresarial": "Cambios en procesos, tecnologia o maquinaria . Max. 2 años."
     },
-    "Naturaleza ccidental": {
+    "Naturaleza accidental": {
         "Ocasional": "Actividades no habituales, por un tiempo corto, Max. 6 meses al año.",
         "Suplencia": "Para reemplazar a un trabajador con vinculo suspendido (por licencia, etc..).",
         "Emergencia": "Por eventos inesperados: sismos, inundaciones, etc. Dure lo que dure la emergencia."
     },
-    "Naturaleza bra o servicio": {
+    "Naturaleza obra o servicio": {
         "Especifico": "Para una tarea concreta con fecha fin (ej. Campaña publicitaria puntual).",
         "Intermitente": "Actividades que ocurren varias veces al año, pero no de forma continua.",
         "Temporada": "Actividades que se repiten cada año en la misma epoca (ej. cosecha, navidad)."
@@ -35,6 +35,7 @@ def clear():
     return os.system("cls") if os.name == "nt" else os.system("clear")
 
 def generar_resumen(c):
+    clear()
     print(f"{blanco}=" * 40)
     print(f"{titulo}RESUMEN DEL CONTRATO LABORAL".center(40))
     print(f"{blanco}=" * 40)
@@ -45,18 +46,13 @@ def generar_resumen(c):
     print(f"{titulo}Modaliad: {texto}{c.upper()}")
     print(f"{titulo}Descripcion: ", end="")
 
-    if c in contratos:
-        valor = contratos[c]
-        if isinstance(valor, str):
-            print(f"{texto}{valor}")
+    for clave, valor in contratos.items():
+        if clave == c:
+            print(f"{texto} {valor}")
         elif isinstance(valor, dict):
-            for con in contratos():
-                if isinstance(con, dict):
-                    for clave, descripcion in con.items():
-                        if clave == c:
-                            print(f"{descripcion}")
-        else:
-            print(f"{error}tipo de contrato no valido")
+            for cl, desc in valor.items():
+                if cl == c:
+                    print(f"{texto} {desc}")
     input()
         
 
