@@ -8,6 +8,21 @@ exito = Fore.GREEN + Style.BRIGHT
 blanco = Fore.WHITE + Style.BRIGHT
 
 contratos_validos = ("indeterminado", "inicio o incremento de actividades", "necesidades del mercado", "reconversion empresarial", "ocasional", "suplencia", "emergencia", "especifico", "intermitente", "temporada")
+cargos_direccion = ["director", "gerente", "jefe general", "subgerente"]
+cargos_confianza = ["analista", "especialista", "supervisor", "coordinador", "encargado", "jefe", "asistente senior"]
+justificacion_por_tipo = {
+    12: "Se trata de un cargo de dirección (como gerente o director). "
+        "La ley permite ampliar el período de prueba hasta 12 meses. "
+        "(Art. 10, D.S. N.º 003-97-TR).",
+
+    6: "Se trata de un cargo calificado o de confianza (como analista, supervisor o coordinador). "
+       "La ley permite ampliar el período de prueba hasta 6 meses. "
+       "(Art. 10, D.S. N.º 003-97-TR).",
+
+    3: "No se identificaron funciones especiales en el cargo. "
+       "Se aplica el período de prueba estándar de 3 meses. "
+       "(Art. 10, D.S. N.º 003-97-TR)."
+}
 def clear():
     return os.system("cls" if os.name == 'nt' else "clear")
 
