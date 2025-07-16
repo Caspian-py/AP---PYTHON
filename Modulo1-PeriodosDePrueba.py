@@ -55,7 +55,7 @@ def validacion_contrato():
             if contrato in ("cancelar", "salir"):
                 return None, False
             else:
-                if len(contrato.split()) <= 5 and all(palabra.isalpha() for palabra in contrato) and contrato in contratos_validos:
+                if len(contrato.split()) <= 5 and all(palabra.isalpha() for palabra in contrato.split()) and contrato in contratos_validos:
                     return contrato, True
                 else:
                     raise ValueError
