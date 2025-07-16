@@ -9,7 +9,7 @@ blanco = Fore.WHITE + Style.BRIGHT
 
 contratos_validos = ("indeterminado", "inicio o incremento de actividades", "necesidades del mercado", "reconversion empresarial", "ocasional", "suplencia", "emergencia", "especifico", "intermitente", "temporada")
 cargos_direccion = ["director", "gerente", "jefe general", "subgerente"]
-cargos_confianza = ["analista", "especialista", "supervisor", "coordinador", "encargado", "jefe", "asistente senior"]
+cargos_confianza = ["analista", "especialista", "supervisor", "coordinador", "encargado", "jefe"]
 justificacion_por_tipo = {
     12: "Se trata de un cargo de dirección (como gerente o director). "
         "La ley permite ampliar el período de prueba hasta 12 meses. "
@@ -93,9 +93,25 @@ def datos():
     if not estado_contrato:
         input("CANCELADO")
         return
+    global datos
+    datos = {
+        "nombre": nombre.upper(),
+        "cargo": cargo.upper(),
+        "contrato": contrato.upper()
+    }
 
+def asignacion_periodo():
+    cargo = datos['cargo'].lower()
+    
+    if any(palabra in cargo for palabra in cargos_direccion):
+        print("ENCONTRADO EN DIRECCION")
+    elif any(palabra in cargo for palabra in cargos_confianza):
+        print("ENCONTRADO EN CONFIANZA")
+    else:
+        print("NO HEMOS ENCONTRADO")
 def main():
     datos()
+    asignacion_periodo()
     input()
 
 main()
