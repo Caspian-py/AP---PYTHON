@@ -82,17 +82,17 @@ def datos():
     nombre, estado_nombre = validacion_nombre()
     if not estado_nombre:
         input("CANCELADO")
-        return
+        return False
 
     cargo, estado_cargo = validacion_cargo()
     if not estado_cargo:
         input("CANCELADO")
-        return
+        return False
     
     contrato, estado_contrato = validacion_contrato()
     if not estado_contrato:
         input("CANCELADO")
-        return
+        return False
     global datos
     datos = {
         "nombre": nombre.upper(),
@@ -129,13 +129,18 @@ def resumen_final():
     print(f"Justificaion: {justificacion}")
     print("=" * 60)
     print()
-    if input()
+    if input("REALIZAR OTRA CONSULTA? (s/n) ").strip().lowr() == "n":
+        return False
+    else:
+        return True
 
 def main():
-    datos()
-    asignacion_periodo()
-    resumen_final()
-    input()
+    while True:
+        if not datos():
+            break
+        asignacion_periodo()
+        if not resumen_final():
+            break
 
 main()
 
