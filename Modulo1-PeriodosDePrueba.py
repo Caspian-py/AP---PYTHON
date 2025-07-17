@@ -1,11 +1,6 @@
 
 import os
 from colorama import Fore, Style
-titulo = Fore.YELLOW + Style.BRIGHT
-texto = Fore.CYAN + Style.BRIGHT
-error = Fore.RED + Style.BRIGHT
-exito = Fore.GREEN + Style.BRIGHT
-blanco = Fore.WHITE + Style.BRIGHT
 
 contratos_validos = ("indeterminado", "inicio o incremento de actividades", "necesidades del mercado", "reconversion empresarial", "ocasional", "suplencia", "emergencia", "especifico", "intermitente", "temporada")
 cargos_direccion = ["director", "gerente", "jefe general", "subgerente"]
@@ -77,7 +72,7 @@ def validacion_contrato():
         except ValueError:
             input("CONTRATO NO ENCONTRADO")
 
-def datos():
+def informacion():
 
     nombre, estado_nombre = validacion_nombre()
     if not estado_nombre:
@@ -99,6 +94,7 @@ def datos():
         "cargo": cargo.upper(),
         "contrato": contrato.upper()
     }
+    return True
 
 def asignacion_periodo():
     cargo = datos['cargo'].lower()
@@ -127,16 +123,17 @@ def resumen_final():
     print("Resultado:")
     print(f"Periodo de prueba asignado: {tiempo} meses")
     print(f"Justificaion: {justificacion}")
+    print()
     print("=" * 60)
     print()
-    if input("REALIZAR OTRA CONSULTA? (s/n) ").strip().lowr() == "n":
+    if input("REALIZAR OTRA CONSULTA? (s/n) ").strip().lower() == "n":
         return False
     else:
         return True
 
 def main():
     while True:
-        if not datos():
+        if not informacion():
             break
         asignacion_periodo()
         if not resumen_final():
