@@ -102,13 +102,32 @@ def datos():
 
 def asignacion_periodo():
     cargo = datos['cargo'].lower()
-    
+    global justificacion, tiempo
     if any(palabra in cargo for palabra in cargos_direccion):
-        print("ENCONTRADO EN DIRECCION")
+        tiempo = 12
+        justificacion = justificacion_por_tipo[12]
     elif any(palabra in cargo for palabra in cargos_confianza):
-        print("ENCONTRADO EN CONFIANZA")
+        tiempo = 6
+        justificacion = justificacion_por_tipo[6]
     else:
-        print("NO HEMOS ENCONTRADO")
+        tiempo = 3
+        justificacion = justificacion_por_tipo[3]
+
+def resumen_final():
+    print("=" * 60)
+    print("EVALUCACION DEL PERIODO DE PRUEBA")
+    print("=" * 60)
+    print()
+    print("Datos del trabajador: ")
+    print(f"Nombres: {datos['nombre'].upper()}")
+    print(f"Cargo: {datos['cargo'].upper()}")
+    print(f"Contrato: {datos['contrato'].upper()}")
+    print()
+    print("Resultado:")
+    print("Periodo de prueba asignado: {tiempo} meses")
+    print("Justificaion: {justificacion}")
+    print("=" * 60)
+
 def main():
     datos()
     asignacion_periodo()
