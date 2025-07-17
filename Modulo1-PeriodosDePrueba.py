@@ -114,6 +114,7 @@ def asignacion_periodo():
         justificacion = justificacion_por_tipo[3]
 
 def resumen_final():
+    clear()
     print("=" * 60)
     print("EVALUCACION DEL PERIODO DE PRUEBA")
     print("=" * 60)
@@ -124,13 +125,16 @@ def resumen_final():
     print(f"Contrato: {datos['contrato'].upper()}")
     print()
     print("Resultado:")
-    print("Periodo de prueba asignado: {tiempo} meses")
-    print("Justificaion: {justificacion}")
+    print(f"Periodo de prueba asignado: {tiempo} meses")
+    print(f"Justificaion: {justificacion}")
     print("=" * 60)
+    print()
+    if input()
 
 def main():
     datos()
     asignacion_periodo()
+    resumen_final()
     input()
 
 main()
