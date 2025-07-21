@@ -8,7 +8,7 @@ def validar_nombre():
         clear()
         try:
             print("NOMBRE:")
-            nombre = input().lower().strip()
+            nombre = input(">>> ").lower().strip()
             if nombre in ("cancelar", "salir"):
                 return None, True
             else:
@@ -18,8 +18,24 @@ def validar_nombre():
                     raise ValueError
         except ValueError:
             clear()
-            input("NOMBRE NO VALIDO")
+            input("NOMBRE NO VALIDO... ")
 
+def validar_cargo():
+    while True:
+        clear()
+        try:
+            print("CARGO:")
+            cargo = input(">>> ").lower().strip()
+            if cargo in ("cancelar", "salir"):
+                return None, True
+            else:
+                if len(cargo.split()) in (2, 3, 4) and all(palabra.isalpha() for palabra in cargo.split()):
+                    return cargo, False
+                else:
+                    raise ValueError
+        except ValueError:
+            clear()
+            input("CARGO NO VALIDO... ")
         
 
 
@@ -28,9 +44,17 @@ def solicitar_datos():
         nombre, estado_nombre = validar_nombre()
         if estado_nombre:
             clear()
-            print("CANCELANDO...")
+            print("CANCELANDO... ")
             time.sleep(2)
             return False
+        
+        cargo, estado_cargo = validar_cargo()
+        if estado_cargo:
+            clear()
+            print("CANCELANDO... ")
+            time.sleep(2)
+            return False
+        
         
         
 
