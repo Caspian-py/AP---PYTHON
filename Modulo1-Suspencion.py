@@ -71,6 +71,13 @@ Base legal: D.S. N.º 003-97-TR, Art. 16(f).
 """
 }
 
+def mostrar_causas():
+
+    for id, causa in enumerate(causas_con_goce):
+        print(f"{id}) {causa.upper()}) {causas_con_goce[f'{causa}']}")
+    for id, causa in enumerate(causas_sin_goce):
+        print(f"{id}) {causa.upper()}: {causas_sin_goce[f'{causa}']}")
+
 def validar_nombre():
     while True:
         clear()
@@ -109,7 +116,7 @@ def validar_causa():
     while True:
         clear()
         try:
-            print(causas_con_goce)
+            mostrar_causas()
             print("DIGITE LA CAUSA DE SUSPENCION:")
             causa = input("CAUSA >>> ").lower().strip()
             if causa in ("cancelar", "salir"):
