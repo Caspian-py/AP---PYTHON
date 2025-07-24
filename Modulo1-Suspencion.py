@@ -2,6 +2,7 @@ import os, time
 
 def clear():
     return os.system("cls" if os.name == "nt" else "clear")
+
 causas_suspension = {
     "licencia por maternidad": {
         "tipo": "con goce",
@@ -149,7 +150,7 @@ def validar_causa():
         clear()
         try:
             mostrar_causas()
-            print("DIGITE LA CAUSA DE SUSPENCION:")
+            print("DIGITE LA CAUSA DE SUSPENSION:")
             causa = input("CAUSA >>> ").lower().strip()
             if causa in ("cancelar", "salir"):
                 return None, True
@@ -164,8 +165,14 @@ def validar_causa():
                         valor = causas_suspension[clave]
                         tipo = valor['tipo']
                         concepto = valor['descripcion']
-                        return (clave, tipo, concepto), False
-                        
+                        clear()
+                        print(f"{clave.upper()}")
+                        print(f"- {tipo}")
+                        print(f"- {concepto}")
+                        if input("SELECCIONAR (s) - ATRAS O CANCELAR (enter): ").lower().strip() == "s":
+                            return (clave, tipo, concepto), False
+                        else:
+                            continue
                     else:
                         raise ValueError
                 else:
@@ -173,10 +180,6 @@ def validar_causa():
         except ValueError:
             clear()
             input("CAUSA NO ENCONTRADA")
-
-
-
-
 
 def solicitar_datos():
     while True:
@@ -197,21 +200,44 @@ def solicitar_datos():
         causa, estado_causa = validar_causa()
         if estado_causa:
             clear()
-            print("CANCENLANDO... ")
-            time.sleep()
+            print("CANCELANDO... ")
+            time.sleep(2)
             return False
+        
+        global datos_trabajador
+        datos_trabajador = {
+            "nombre": nombre,
+            "cargo": cargo,
+            "causa": causa
+        }
+        return True
 
-        
-        
-        
+def resumen_final():
+    clear()
+    print("=" * 40)
+    print("RESUMEN DE SUSPENSION LABORAL")
+    print("=" * 40)
+    print()
+    print("Datos del Trabajador:")
+    print(f"Nombre: {datos_trabajador['nombre'].upper()}")
+    print(f"Cargo: {datos_trabajador['cargo'].upper()}")
+    print()
+    print("Causa de Suspension: ")
+    print(f"Causa Legal: {datos_trabajador['causa'][0].upper()}")
+    print(f"Tipo de Suspension: {datos_trabajador['causa'][1].upper()}")
+    print(f"Detalles Legales: {datos_trabajador['causa'][2].upper()}")
+    print()
+    print("=" * 40)
+    print()
 
 
 def main():
     while True:
         clear()
-        solicitar_datos()
-        input()
-
-
+        if solicitar_datos() == False:
+            return
+        resumen_final()
+        if input("REALIZAR OTRA CONSULTA (s/n): ").strip().lower() != "s":
+            return
 
 main()
