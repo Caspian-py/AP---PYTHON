@@ -156,9 +156,18 @@ def validar_causa():
             else:
                 
                 if causa.isdigit():
-                    causa = int(causa)
-                    if causa in range(0, len(causas_suspension)):
-                        return causa, False
+                    id = int(causa)
+                    id -= 1
+                    if id in range(0, len(causas_suspension)):
+                        tempclaves = list(causas_suspension.keys())
+                        clave = tempclaves[id]
+                        valor = causas_suspension[clave]
+                        tipo = valor['tipo']
+                        concepto = valor['descripcion']
+                        return (clave, tipo, concepto), False
+                        
+                    else:
+                        raise ValueError
                 else:
                     raise ValueError
         except ValueError:
