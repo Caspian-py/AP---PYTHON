@@ -5,19 +5,17 @@ def clear():
 def validacion_nombre():
     while True:
         clear()
-        print("PARA CERRAR O CANCELAR INGRESE (cancelar)")
+        print("PARA CERRAR O CANCELAR INGRESE (cancelar, salir)")
         print()
         try:
             print("NOMBRE:")
             nombre = input(">>> ").strip().lower()
-            if nombre in ('cancelar'):
-                input('hello')
+            if nombre in ('cancelar', 'salir'):
                 return None, False
             else:
-                if len(nombre.split()) in range(3, 5):
+                if len(nombre.split()) in range(3, 5) and all(letra.isalpha() for letra in nombre.split()):
                     return nombre, True
                 else:
-                    
                     raise ValueError
         except ValueError:
             input("NOMBRE NO VALIDO... ")
@@ -28,7 +26,6 @@ def datos_trabajador():
         clear()
         nombre, estado_nombre = validacion_nombre()
         if estado_nombre == False:
-            print("cancelado")
             return False
         
 def main():
