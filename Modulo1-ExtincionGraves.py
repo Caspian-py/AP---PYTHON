@@ -99,7 +99,7 @@ def validacion_nombre():
 def validacion_cargo():
     while True:
         clear()
-        print("INGRESE CARGO DEL TRABAJADOR PARA SALIR INGRESE ('salir', 'cancenlar')")
+        print("INGRESE CARGO DEL TRABAJADOR PARA SALIR INGRESE ('salir', 'cancelar')")
         try:
             print("CARGO:")
             cargo = input(">>> ").lower().strip()
@@ -120,7 +120,7 @@ def mostrar_causas():
 def validacion_causa():
     while True:
         clear()
-        print("DIGITE LA CAUSA, PARA SALIR INHRESE ('salir', 'cancenlar')")
+        print("DIGITE LA CAUSA, PARA SALIR INGRESE ('salir', 'cancelar')")
         mostrar_causas()
         print()
         try:
@@ -176,7 +176,7 @@ def resumen():
     print("DATOS DEL TRABAJADOR:")
     print(f"NOMBRE: {datos['nombre'].upper()}")
     print(f"CARGO: {datos['cargo'].upper()}")
-    print(f"CAUSA: {datos['causa'][0]}")
+    print(f"CAUSA: {datos['causa'][0].upper()}")
     print(f"Descripcion: {datos['causa'][1]}")
     print(f"Explicacion del Procedimiento: {datos['causa'][2]}")
     print()
