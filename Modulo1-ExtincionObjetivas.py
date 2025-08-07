@@ -117,7 +117,7 @@ def resumen_extincion():
     print(f"CARGO: {datos['cargo'].upper()}")
     print(f"CAUSA LEGAL DE EXTINCION:")
     print(f"{datos['causa'][0].upper()}: {datos['causa'][1]}")
-    print()
+    print() 
 def main():
     while True:
         clear()
@@ -125,7 +125,7 @@ def main():
             break
         resumen_extincion()
         print()
-        if input("REALIZAR OTRA CONSULTA? (S/N): ").strip().lower() == "n":
+        if input("REALIZAR OTRA CONSULTA? (S/N): ").strip().lower().startswith('n'):
             break
 
 main()
