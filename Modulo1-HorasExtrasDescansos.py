@@ -32,8 +32,8 @@ def validacion_cargo():
         print()
         try:
             print("CARGO:")
-            cargo = input().lower().strip()
-            if cargo in ('cancelar', ' salir'):
+            cargo = input(">>> ").lower().strip()
+            if cargo in ('cancelar', 'salir'):
                 return None, False
             else:
                 if len(cargo.split()) in range(2, 6) and all(letra.isalpha() for letra in cargo.split()):
@@ -42,6 +42,25 @@ def validacion_cargo():
                     raise ValueError
         except ValueError:
             input("CARGO NO VALIDO... ")
+
+def validacion_renumeracion_mensual():
+    while True:
+        clear()
+
+        print("INGRESE LA RENUMERACION MENSUAL DEL TRABAJADOR")
+        print("PARA SALIR O CANCELAR INGRESE ('salir', 'cancelar')")
+        print()
+        try:
+            print("RENUMERACION MENSUAL:")
+            renumeracion_mensual = input(">>> ").lower().strip().replace(",", "")
+            if renumeracion_mensual in ('cancelar', 'salir'):
+                return None, False
+            elif float(renumeracion_mensual) and 1025 <= float(renumeracion_mensual) <= 50000:
+                return renumeracion_mensual, True
+            else:
+                raise ValueError
+        except ValueError:
+            input("RENUMERACION MENSUAL NO VALIDO... ")
 
 
 
@@ -57,6 +76,11 @@ def recoleccion_datos():
         cargo, estado_cargo = validacion_cargo()
         if estado_cargo == False:
             return False
+        
+        renumeracion_mensual, estado_renumeracion_mensual = validacion_renumeracion_mensual()
+        if estado_renumeracion_mensual == False:
+            return False
+        
 
 def main():
     while True:
