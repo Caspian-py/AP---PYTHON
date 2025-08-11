@@ -62,7 +62,28 @@ def validacion_renumeracion_mensual():
         except ValueError:
             input("RENUMERACION MENSUAL NO VALIDO... ")
 
+def validacion_horas():
+    while True:
+        clear()
+        print("INGRESE SUS HORAS ORDINARIAS Y HORAS EXTRAS TRABAJADAS DEL TRABAJADOR")
+        print("PARA SALIR O CANCELAR INGRESE ('salir','cancelar')")
+        print()
+        try:
+            print("HORAS DE LA JORNADA SEMANAL:")
+            if (jornada_semanal := input(">>> ").lower().strip()) in ('salir','cancelar'):
+                return None, False
+            elif not jornada_semanal.isdigit() or not jornada_semanal in range(1, 48):
+                raise ValueError
+            
+            print("HORAS ORDINARIAS SEGUN SEMANA.")
+            for i in range(4):
+                print(f"SEMANA {i}")
+                input()
+            
+                
 
+        except ValueError:
+            input("HORA NO VALIDA... ")
 
 
 def recoleccion_datos():
@@ -79,6 +100,10 @@ def recoleccion_datos():
         
         renumeracion_mensual, estado_renumeracion_mensual = validacion_renumeracion_mensual()
         if estado_renumeracion_mensual == False:
+            return False
+        
+        horas, estado_horas = validacion_horas()
+        if estado_horas == False:
             return False
         
 
