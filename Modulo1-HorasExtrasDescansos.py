@@ -69,21 +69,32 @@ def validacion_horas():
         print("PARA SALIR O CANCELAR INGRESE ('salir','cancelar')")
         print()
         try:
-            print("HORAS DE LA JORNADA SEMANAL:")
-            if (jornada_semanal := input(">>> ").lower().strip()) in ('salir','cancelar'):
+            print("HORAS DE LA JORNADA MENSUAL:")
+            if (jornada_mensual := input(">>> ").lower().strip()) in ('salir','cancelar'):
                 return None, False
-            elif not jornada_semanal.isdigit() or not jornada_semanal in range(1, 48):
+            elif not jornada_mensual.isdigit() or not jornada_mensual in range(120, 193):
                 raise ValueError
             
-            print("HORAS ORDINARIAS SEGUN SEMANA.")
-            for i in range(4):
-                print(f"SEMANA {i}")
-                input()
-            
+            while True:
+                print("TOTAL DE HORAS EXTRAS POR MES QUE ESTAN DENTRO DEL LIMITE DE 2 HORAS DIAS (25%)")
+                if (extras25:=input(">>> ").strip().lower()) in ('salir','cancelar'):
+                    return None, False
+                elif not extras25.isdigit() or not extras25 in range(0, 49):
+                    input("HORAS NO VALIDAS... ")
+                    continue
+
+                print("TOTAL DE HORAS EXTRAS POR MES QUE EXCEDEN LAS 2 HORAS DIARIAS (35%)")
+                if (extras35:=input(">>> ").strip().lower()) in ('salir', 'cancelar'):
+                    return None, False
+                elif not extras35.isdigit() or not extras35 in range(0, 61):
+                    input("HORAS NO VALIDAS... ")
+                    continue
                 
+                if (extras25 + extras35) <= 96:
+                    break
 
         except ValueError:
-            input("HORA NO VALIDA... ")
+            input("HORAS NO VALIDAS... ")
 
 
 def recoleccion_datos():
